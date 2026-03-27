@@ -10,9 +10,5 @@
     "declarationMap": true,
     "composite": true
   },
-  "references": [
-    { "path": "./packages/shared" },
-    { "path": "./packages/orchestrator-ui" },
-    { "path": "./apps/orchestrator" }
-  ]
+  "references": []
 }

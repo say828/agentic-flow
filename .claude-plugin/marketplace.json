@@ -5,14 +5,14 @@
   },
   "plugins": [
     {
-      "name": "claude-orchestrator",
-      "source": "./apps/orchestrator",
-      "description": "Browser-based multi-session management UI for Claude Code - real-time session monitoring, hook alerts, and dashboard"
-    },
-    {
       "name": "ship",
       "source": "./plugins/ship",
       "description": "PR 크기 기준 자동 분할과 순차 PR 생성을 자동화하는 Git 워크플로우 도구"
+    },
+    {
+      "name": "spec-orchestrator",
+      "source": "./plugins/spec-orchestrator",
+      "description": "Spec-driven exact implementation workflow with canonical targets, deterministic proof gates, AI diagnosis, and repair loops"
     }
   ]
 }

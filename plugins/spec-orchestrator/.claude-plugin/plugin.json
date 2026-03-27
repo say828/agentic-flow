@@ -1,0 +1,10 @@
+{
+  "name": "spec-orchestrator",
+  "version": "0.1.0",
+  "description": "Spec-driven development orchestrator for exact implementation, deterministic verification, and AI-assisted repair loops",
+  "author": {
+    "name": "say828",
+    "email": "gusdn0828@gmail.com",
+    "url": "https://github.com/say828"
+  }
+}
