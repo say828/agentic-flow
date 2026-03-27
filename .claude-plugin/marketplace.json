@@ -13,6 +13,11 @@
       "name": "spec-orchestrator",
       "source": "./plugins/spec-orchestrator",
       "description": "Spec-driven exact implementation workflow with canonical targets, deterministic proof gates, AI diagnosis, and repair loops"
+    },
+    {
+      "name": "autonomous-decision-loop",
+      "source": "./plugins/autonomous-decision-loop",
+      "description": "Response-conditioned autonomous decision loop for Claude Code and Codex"
     }
   ]
 }
