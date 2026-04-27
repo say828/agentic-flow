@@ -1,3 +1,7 @@
+---
+description: Show the integrated SDD workflow for Agentic Dev
+---
+
 # agentic-dev:sdd-workflow
 
 Use the integrated SDD workflow from `skill/SKILL.md`.

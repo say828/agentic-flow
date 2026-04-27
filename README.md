@@ -28,6 +28,21 @@ Install the workflow:
 /plugin install agentic-dev@agentic-flow
 ```
 
+If installation fails with an error like `Invalid schema: plugins.N.source`, update Claude Code first:
+
+```bash
+claude update
+claude plugin marketplace update
+```
+
+Then retry:
+
+```bash
+claude plugin install agentic-dev@agentic-flow
+```
+
+That schema error can come from another configured marketplace, especially `claude-plugins-official`, when the local Claude Code version is older than the marketplace manifest format.
+
 Available Claude commands:
 
 ```text

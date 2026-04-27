@@ -1,3 +1,7 @@
+---
+description: Initialize the current repository into the Agentic Dev flow
+---
+
 # agentic-dev:init
 
 Initialize the current repository into the Agentic Dev flow.
