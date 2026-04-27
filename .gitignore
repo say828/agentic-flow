@@ -41,3 +41,6 @@ test/*
 !test/agentic-dev-sandbox/
 !test/agentic-dev-sandbox/**
 test/agentic-dev-sandbox/tmp/
+!test/agentic-dev-dev/
+!test/agentic-dev-dev/**
+test/agentic-dev-dev/tmp/

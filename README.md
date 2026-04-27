@@ -1,68 +1,112 @@
 # Agentic Flow
 
-Claude Code와 Codex에서 같은 개발 프로세스를 쓰기 위한 최소 스토어입니다.
+Agentic Flow is a shared development workflow for Claude Code and Codex.
 
-현재 유지하는 구성은 실제 agentic development 흐름에 쓰는 것만 남겼습니다.
+It packages one installable workflow, `agentic-dev`, that turns a repository into an agent-ready development workspace: planning, implementation, verification, GitHub tracking, Discord notifications, and repeatable proof commands all live in predictable repo-local files.
 
-- `agentic-dev`: GitHub Project/Issue, SDD planning/verification, repo contract, Discord webhook, proof/repair loop를 묶는 통합 개발 workflow
+## What It Provides
 
-## Claude Code 설치
+- One workflow that works in both Claude Code and Codex
+- SDD-first planning and verification under `sdd/`
+- Repo-local command contracts in `.agentic-dev/contract.json`
+- Runtime aliases for Claude and Codex in `.claude/` and `.codex/`
+- Optional GitHub Project and Issue setup through `gh`
+- Optional Discord webhook test notification without committing secrets
+- Deterministic build/proof/deploy/verify phase runners
 
-Marketplace를 추가합니다.
+## Install In Claude Code
+
+Add the marketplace:
 
 ```bash
 /plugin marketplace add say828/agentic-flow
 ```
 
-플러그인을 설치합니다.
+Install the workflow:
 
 ```bash
 /plugin install agentic-dev@agentic-flow
 ```
 
-## Codex 설치
+Available Claude commands:
 
-Codex 전용 설치 스크립트는 `agentic-dev` skill만 설치합니다. SDD workflow는 `agentic-dev` 안에 통합되어 있습니다.
+```text
+/agentic-dev:init
+/agentic-dev:sdd-workflow
+```
+
+## Install In Codex
+
+Run the installer:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/say828/agentic-flow/main/scripts/install.sh | bash
 ```
 
-설치 결과:
+Installed paths:
 
-- `~/.codex/skills/agentic-dev`
-- `~/.local/share/agentic-flow/repo`
+```text
+~/.codex/skills/agentic-dev
+~/.local/share/agentic-flow/repo
+```
 
-## 첫 repo 초기화
+## Initialize A Repository
 
-처음 사용하는 repo에서는 `agentic-dev` 초기화 스크립트를 실행합니다.
+From any repository you want to manage with Agentic Flow:
+
+```bash
+~/.codex/skills/agentic-dev/scripts/init_agentic_dev.sh "task or product name" /path/to/repo
+```
+
+To also create or reuse a GitHub Project and create a GitHub Issue:
 
 ```bash
 ~/.codex/skills/agentic-dev/scripts/init_agentic_dev.sh "task or product name" /path/to/repo --github --project-title "Agentic Dev"
 ```
 
-Discord webhook 테스트까지 포함하려면:
+To send a Discord setup test:
 
 ```bash
 export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
 ~/.codex/skills/agentic-dev/scripts/init_agentic_dev.sh "task or product name" /path/to/repo --github --project-title "Agentic Dev" --send-discord-test
 ```
 
-생성되는 주요 파일:
+The script creates:
 
-- `.agentic-dev/onboarding.json`
-- `.agentic-dev/contract.json`
-- `.codex/agentic-dev.json`
-- `.claude/agentic-dev.json`
-- `.agentic-dev/discord.env.example`
-- `sdd/01_planning/`
-- `sdd/02_plan/`
-- `sdd/03_verify/`
-- `sdd/02_plan/canonical-targets/`
+```text
+.agentic-dev/contract.json
+.agentic-dev/onboarding.json
+.agentic-dev/discord.env.example
+.codex/agentic-dev.json
+.claude/agentic-dev.json
+sdd/01_planning/
+sdd/02_plan/
+sdd/03_verify/
+sdd/99_toolchain/
+```
 
-## Repo contract 실행
+## Repository Contract
 
-`agentic-dev`는 repo-local `.agentic-dev/contract.json`에 적힌 명령을 실행합니다.
+Agentic Flow does not hardcode project-specific commands. Each repository owns its command contract:
+
+```text
+.agentic-dev/contract.json
+```
+
+The contract defines phases such as:
+
+```json
+{
+  "commands": {
+    "build": "npm run build",
+    "proof": "npm run proof",
+    "deploy_dev": "npm run deploy:dev",
+    "verify_dev": "npm run verify:dev"
+  }
+}
+```
+
+Run phases through the bundled runner:
 
 ```bash
 ~/.codex/skills/agentic-dev/scripts/run_repo_phase.sh build /path/to/repo
@@ -71,14 +115,51 @@ export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
 ~/.codex/skills/agentic-dev/scripts/run_repo_phase.sh verify_dev /path/to/repo
 ```
 
-## 남긴 경로
+The runner resolves the nearest contract in this order:
 
 ```text
-.claude-plugin/marketplace.json
-codex/skills/agentic-dev/
-plugins/agentic-dev/
-scripts/install.sh
-docs/agentic-dev-plugin.md
-LICENSE
-README.md
+.codex/agentic-dev.json
+.claude/agentic-dev.json
+.agentic-dev/contract.json
+```
+
+## SDD Workflow
+
+Agentic Flow keeps durable delivery records in `sdd/`:
+
+- `sdd/01_planning`: current planning and specs
+- `sdd/02_plan`: executable task plans and canonical targets
+- `sdd/03_verify`: retained verification evidence and residual risk
+- `sdd/99_toolchain`: repo-local SDD automation
+
+The default loop is:
+
+1. Inspect or update planning.
+2. Create or update the task plan.
+3. Implement against the repo contract.
+4. Run build, proof, deploy, and verification phases as applicable.
+5. Record evidence and residual risk in `sdd/03_verify`.
+
+## Local Sandbox
+
+This repository includes a runnable sandbox at:
+
+```text
+test/agentic-dev-sandbox
+```
+
+Run its phases from the repository root:
+
+```bash
+codex/skills/agentic-dev/scripts/run_repo_phase.sh build test/agentic-dev-sandbox
+codex/skills/agentic-dev/scripts/run_repo_phase.sh proof test/agentic-dev-sandbox
+codex/skills/agentic-dev/scripts/run_repo_phase.sh deploy_dev test/agentic-dev-sandbox
+codex/skills/agentic-dev/scripts/run_repo_phase.sh verify_dev test/agentic-dev-sandbox
+codex/skills/agentic-dev/scripts/analyze_proof_results.py test/agentic-dev-sandbox/tmp/proof-results.json
+```
+
+For a fresh manual setup test, use:
+
+```text
+test/agentic-dev-dev
 ```
