@@ -7,16 +7,16 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 try:
     import tomllib
 except ModuleNotFoundError:  # pragma: no cover
     tomllib = None
 
-MARKETPLACE_NAME = "say828-agent-market"
+MARKETPLACE_NAME = "agentic-flow"
 PLUGIN_NAME = "autonomous-decision-loop"
-REPO_SLUG = "say828/say828-agent-market"
+REPO_SLUG = "say828/agentic-flow"
 
 
 def ensure_dir(path: Path) -> None:
@@ -87,7 +87,7 @@ def install_claude(repo_dir: Path) -> None:
 
     installed = load_json(installed_plugins_path, {"plugins": {}})
     plugin_id = f"{PLUGIN_NAME}@{MARKETPLACE_NAME}"
-    now = datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     installed.setdefault("plugins", {})[plugin_id] = [{
         "scope": "user",
         "installPath": str(installed_path),
@@ -191,14 +191,14 @@ def install_codex(repo_dir: Path) -> None:
     wrapper_source = repo_dir / "codex" / "bin" / "codex"
     inline_source = repo_dir / "codex" / "bin" / "codex-inline-tmux.sh"
     real_codex = resolve_real_codex({wrapper_source, wrapper_target}) or "/usr/local/bin/codex"
-    market_home = Path.home() / ".local" / "share" / "say828-agent-market"
+    market_home = Path.home() / ".local" / "share" / "agentic-flow"
     ensure_dir(market_home)
     env_file = market_home / "codex.env"
     env_file.write_text(f"CODEX_REAL_BIN={real_codex}\n")
     for target, source in ((wrapper_target, wrapper_source), (bin_dir / "codex-inline-tmux.sh", inline_source)):
         if target.exists() or target.is_symlink():
             if target.name == "codex" and not target.is_symlink():
-                backup = bin_dir / "codex.say828-agent-market-backup"
+                backup = bin_dir / "codex.agentic-flow-backup"
                 if backup.exists() or backup.is_symlink():
                     backup.unlink()
                 shutil.move(str(target), str(backup))
@@ -219,7 +219,7 @@ def main() -> int:
         install_claude(repo_dir)
     if not args.skip_codex:
         install_codex(repo_dir)
-    print("say828-agent-market ADL install complete")
+    print("agentic-flow ADL install complete")
     return 0
 
 

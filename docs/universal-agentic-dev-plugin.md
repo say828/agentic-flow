@@ -152,7 +152,7 @@ Ship as marketplace plugin assets:
 - orchestrator integrations
 - review/approval surfaces
 
-## Proposed Product Surface In `say828-agent-market`
+## Proposed Product Surface In `agentic-flow`
 
 ### Codex skill
 
@@ -192,7 +192,7 @@ For any feature-oriented request:
 
 ## Success Criteria
 
-The plugin is successful when installing `say828-agent-market` makes it possible to invoke a named workflow and reliably obtain:
+The plugin is successful when installing `agentic-flow` makes it possible to invoke a named workflow and reliably obtain:
 
 - a plan
 - a canonical target

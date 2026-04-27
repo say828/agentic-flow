@@ -8,7 +8,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 try:
     import tomllib
@@ -88,7 +88,7 @@ def install_claude(repo_dir: Path) -> None:
 
     installed = load_json(installed_plugins_path, {"plugins": {}})
     plugin_id = f"{PLUGIN_NAME}@{MARKETPLACE_NAME}"
-    now = datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     installed.setdefault("plugins", {})[plugin_id] = [{
         "scope": "user",
         "installPath": str(installed_path),

@@ -3,7 +3,7 @@ set -euo pipefail
 
 WORKDIR="${CODEX_INLINE_WORKDIR:-$PWD}"
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-ENV_FILE="${HOME}/.local/share/say828-agent-market/codex.env"
+ENV_FILE="${HOME}/.local/share/agentic-flow/codex.env"
 if [[ -f "${ENV_FILE}" ]]; then
   # shellcheck disable=SC1090
   source "${ENV_FILE}"

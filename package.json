@@ -1,5 +1,5 @@
 {
-  "name": "say828-agent-market-monorepo",
+  "name": "agentic-flow-monorepo",
   "private": true,
   "workspaces": [
     "packages/*"

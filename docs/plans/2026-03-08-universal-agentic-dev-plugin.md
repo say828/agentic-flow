@@ -3,7 +3,7 @@
 ## Scope
 
 - Design a universal development plugin methodology usable across Claude Code and Codex.
-- Package the methodology into `say828-agent-market` as installable Codex skill assets first.
+- Package the methodology into `agentic-flow` as installable Codex skill assets first.
 - Define the future Claude-side plugin surface without breaking the existing marketplace layout.
 - Expand the Codex package from documentation-only assets into an executable workflow scaffold.
 - Keep the Codex package general so `aspace` service repos such as `palcar` can adopt it through repo-local contracts rather than service-specific forks.
@@ -12,12 +12,12 @@
 
 - Add a durable architecture document explaining the hybrid `canonical spec -> deterministic gate -> AI analysis -> repair loop` model.
 - Add an installable Codex skill package that exposes the methodology as a named workflow.
-- Update install and README surfaces so the skill is installed and discoverable from `say828-agent-market`.
+- Update install and README surfaces so the skill is installed and discoverable from `agentic-flow`.
 - Add a first Claude marketplace plugin surface for the same methodology.
 
 ## Checklist
 
-- [x] Inspect current `say828-agent-market` layout and installer behavior
+- [x] Inspect current `agentic-flow` layout and installer behavior
 - [x] Add architecture/design document
 - [x] Add Codex skill package
 - [x] Wire installer + README
@@ -28,7 +28,7 @@
 
 ## Work Log
 
-- 2026-03-08 14:52 - Plan created after confirming local repo path `/home/sh/Documents/Github/say828-agent-market`.
+- 2026-03-08 14:52 - Plan created after confirming local repo path `/home/sh/Documents/Github/agentic-flow`.
 - 2026-03-08 14:53 - Current marketplace structure verified: Claude plugins via `.claude-plugin`, Codex assets via `codex/skills`, installer currently ships `planning-with-files` and `codex-hud`.
 - 2026-03-08 15:01 - Added `docs/universal-agentic-dev-plugin.md` and `codex/skills/universal-agentic-dev/` to package the methodology as installable Codex assets.
 - 2026-03-08 15:08 - Added `plugins/spec-orchestrator` and registered it in `.claude-plugin/marketplace.json` as the first Claude plugin surface for the same workflow.

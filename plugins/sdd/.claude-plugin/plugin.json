@@ -1,0 +1,14 @@
+{
+  "name": "sdd",
+  "version": "0.1.0",
+  "description": "SDD-first development workflow with planning, build, verification, operate, regression, and staged rollout gates.",
+  "author": {
+    "name": "say828",
+    "email": "gusdn0828@gmail.com",
+    "url": "https://github.com/say828"
+  },
+  "homepage": "https://github.com/say828/agentic-flow",
+  "repository": "https://github.com/say828/agentic-flow",
+  "license": "MIT",
+  "keywords": ["claude-code", "codex", "sdd", "agentic-flow", "development-workflow"]
+}

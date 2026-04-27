@@ -1,7 +1,10 @@
 {
-  "name": "say828-agent-market",
+  "name": "agentic-flow",
   "owner": {
     "name": "say828"
+  },
+  "metadata": {
+    "description": "Claude Code and Codex workflows for replacing the development process with agentic planning, build, verification, operation, and automation loops."
   },
   "plugins": [
     {
@@ -18,6 +21,11 @@
       "name": "autonomous-decision-loop",
       "source": "./plugins/autonomous-decision-loop",
       "description": "Response-conditioned autonomous decision loop for Claude Code and Codex"
+    },
+    {
+      "name": "sdd",
+      "source": "./plugins/sdd",
+      "description": "SDD-first development workflow for Claude Code and Codex"
     }
   ]
 }
