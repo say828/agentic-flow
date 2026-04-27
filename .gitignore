@@ -37,4 +37,7 @@ temp/
 *.tmp
 
 # Test files
-test/
+test/*
+!test/agentic-dev-sandbox/
+!test/agentic-dev-sandbox/**
+test/agentic-dev-sandbox/tmp/

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "name": "agentic-dev-sandbox",
+  "spec": {
+    "planning_paths": [
+      "sdd/01_planning",
+      "sdd/02_plan"
+    ],
+    "canonical_targets_dir": "sdd/02_plan/canonical-targets"
+  },
+  "commands": {
+    "build": "mkdir -p tmp && echo build-ok > tmp/build.txt",
+    "proof": "mkdir -p tmp && printf '{\"cases\":[{\"id\":\"sandbox\",\"diff_ratio\":0}]}\\n' > tmp/proof-results.json",
+    "deploy_dev": "mkdir -p tmp && echo deploy-dev-ok > tmp/deploy_dev.txt",
+    "verify_dev": "mkdir -p tmp && echo verify-dev-ok > tmp/verify_dev.txt"
+  },
+  "artifacts": {
+    "proof_output": "tmp/proof-results.json"
+  },
+  "integrations": {
+    "github": {
+      "project_title": "Agentic Dev",
+      "issue_label": "agentic-dev"
+    },
+    "discord": {
+      "webhook_env_var": "DISCORD_WEBHOOK_URL"
+    },
+    "sdd": {
+      "plan_dir": "sdd/02_plan",
+      "verify_dir": "sdd/03_verify"
+    }
+  },
+  "notes": [
+    "This file is repo-local and keeps the plugin general.",
+    "Point proof to a strict deterministic gate implemented inside the target repo."
+  ]
+}

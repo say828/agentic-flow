@@ -253,11 +253,15 @@ if [[ -z "${slug}" ]]; then
 fi
 issue_title="${issue_title:-Initialize agentic-dev: ${title}}"
 github_repo="${github_repo:-$(detect_repo_slug || true)}"
+sdd_plan_path="sdd/02_plan/01_feature/${slug}_todos.md"
+sdd_verify_path="sdd/03_verify/01_feature/${slug}.md"
+workflow_path="sdd/02_plan/01_feature/${slug}_workflow.md"
+evidence_path="sdd/03_verify/01_feature/${slug}_evidence.md"
 
 "${script_dir}/bootstrap_spec_workspace.sh" "${repo_root}" >/dev/null
 contract_path="$("${script_dir}/init_repo_contract.sh" "${repo_root}")"
-workflow_path="$("${script_dir}/new_spec_workflow.sh" "${title}" "${repo_root}" 2>/dev/null || true)"
-evidence_path="$("${script_dir}/new_spec_evidence.sh" "${title}" "${repo_root}" 2>/dev/null || true)"
+"${script_dir}/new_spec_workflow.sh" "${title}" "${repo_root}" >/dev/null 2>&1 || true
+"${script_dir}/new_spec_evidence.sh" "${title}" "${repo_root}" >/dev/null 2>&1 || true
 
 mkdir -p \
   "${repo_root}/sdd/01_planning/01_feature" \
@@ -282,9 +286,6 @@ mkdir -p \
   "${repo_root}/sdd/03_verify/10_test" \
   "${repo_root}/sdd/99_toolchain" \
   "${repo_root}/.agentic-dev"
-
-sdd_plan_path="sdd/02_plan/01_feature/${slug}_todos.md"
-sdd_verify_path="sdd/03_verify/01_feature/${slug}.md"
 
 if [[ ! -f "${repo_root}/${sdd_plan_path}" ]]; then
   cat > "${repo_root}/${sdd_plan_path}" <<EOF

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "title": "Agentic Dev Sandbox",
+  "github": {
+    "repo": "say828/agentic-flow",
+    "project_title": "Agentic Dev",
+    "project_url": "",
+    "issue_url": ""
+  },
+  "sdd": {
+    "plan": "sdd/02_plan/01_feature/agentic-dev-sandbox_todos.md",
+    "verify": "sdd/03_verify/01_feature/agentic-dev-sandbox.md"
+  },
+  "workflow": "sdd/02_plan/01_feature/agentic-dev-sandbox_workflow.md",
+  "evidence": "sdd/03_verify/01_feature/agentic-dev-sandbox_evidence.md",
+  "discord": {
+    "webhook_env_var": "DISCORD_WEBHOOK_URL",
+    "env_example": ".agentic-dev/discord.env.example"
+  }
+}
