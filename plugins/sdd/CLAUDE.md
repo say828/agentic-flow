@@ -12,7 +12,7 @@ When this plugin applies:
 
 1. Read `skill/SKILL.md`.
 2. Follow its SDD-first workflow.
-3. Keep planning, build, verify, and operate records under the target repository's `sdd/` tree.
+3. Keep planning and verification records under the target repository's `sdd/` tree.
 4. Use `skill/references/section-map.md` for destination paths when needed.
 5. Do not create a parallel `docs/` tree in repositories that use `sdd/`.
 

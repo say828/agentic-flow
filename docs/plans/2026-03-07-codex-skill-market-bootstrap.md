@@ -12,7 +12,7 @@
 ## Scope
 
 - In scope:
-  - Add Codex-installable `planning-with-files` and `codex-hud` skill packages to `agentic-flow`.
+  - Add Codex-installable `planning-with-files` and `codex-hud` skill packages to `agentic-dev`.
   - Extend the market install contract so the repository can install Codex skills as well as the Claude binary/plugin flow.
   - Update top-level documentation so the advertised Codex install path matches the actual implementation.
   - Validate local installation of the Codex skills in an isolated HOME.
@@ -53,7 +53,7 @@
 - 2026-03-07 12:20 - Confirmed the current HUD works as a log/process snapshot but does not yet surface Codex `notify` wiring or ADL notify execution logs directly, which causes the expected hook/notify visibility gap.
 - 2026-03-07 12:28 - Identified the remaining product gap: the user expects Codex HUD to appear automatically alongside the active TUI, so the next implementation step is tmux-based auto-attach instead of manual snapshot invocation.
 - 2026-03-07 12:34 - Added market-packaged Codex wrapper scripts that create a tmux session, split a dedicated HUD pane, and attach the real Codex TUI in the main pane.
-- 2026-03-07 12:39 - Extended the installer to persist the market repo under `~/.local/share/agentic-flow/repo`, install `~/.local/bin/codex` as the wrapper entrypoint, and preserve the real Codex binary path in `codex.env`.
+- 2026-03-07 12:39 - Extended the installer to persist the market repo under `~/.local/share/agentic-dev/repo`, install `~/.local/bin/codex` as the wrapper entrypoint, and preserve the real Codex binary path in `codex.env`.
 - 2026-03-07 12:41 - Validated tmux auto-attach by launching the packaged inline wrapper against a fake Codex binary and confirming a two-pane session with live HUD content in pane `0.1`.
 - 2026-03-07 12:55 - User feedback showed the default auto-attached HUD pane is too intrusive for normal Codex use, so the next adjustment is to disable pane auto-attach by default while keeping it opt-in.
 
@@ -70,7 +70,7 @@
 - `HOME=<tmp> ~/.codex/skills/planning-with-files/scripts/new_plan.sh "market codex test" <tmp-repo>`
 - `HOME=<tmp> ~/.codex/skills/codex-hud/scripts/hud_snapshot.sh --repo "$PWD" --log <tmp-home>/.codex/log/missing.log --limit 2`
 - `rg -n "yourturn-|apps/hook|packages/ui|claude-maestro-linux|claude-maestro-macos|claude-maestro-windows" -S .github/workflows/release.yml scripts/install.sh README.md`
-- `timeout 3 env TMUX='' CODEX_REAL_BIN=<fake-codex> CODEX_INLINE_WORKDIR=<tmp-repo> ~/.local/share/agentic-flow/repo/codex/bin/codex-inline-tmux.sh`
+- `timeout 3 env TMUX='' CODEX_REAL_BIN=<fake-codex> CODEX_INLINE_WORKDIR=<tmp-repo> ~/.local/share/agentic-dev/repo/codex/bin/codex-inline-tmux.sh`
 - `tmux list-panes -t <codex-hud-session>`
 - `tmux capture-pane -p -t <codex-hud-session>:0.1`
 

@@ -1,10 +1,10 @@
 {
-  "name": "agentic-flow",
+  "name": "agentic-dev",
   "owner": {
     "name": "say828"
   },
   "metadata": {
-    "description": "Claude Code and Codex workflows for replacing the development process with agentic planning, build, verification, operation, and automation loops."
+    "description": "Claude Code and Codex workflows for replacing the development process with agentic planning, implementation, verification, and automation loops."
   },
   "plugins": [
     {

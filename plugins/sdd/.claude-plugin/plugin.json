@@ -7,8 +7,8 @@
     "email": "gusdn0828@gmail.com",
     "url": "https://github.com/say828"
   },
-  "homepage": "https://github.com/say828/agentic-flow",
-  "repository": "https://github.com/say828/agentic-flow",
+  "homepage": "https://github.com/say828/agentic-dev",
+  "repository": "https://github.com/say828/agentic-dev",
   "license": "MIT",
-  "keywords": ["claude-code", "codex", "sdd", "agentic-flow", "development-workflow"]
+  "keywords": ["claude-code", "codex", "sdd", "agentic-dev", "development-workflow"]
 }

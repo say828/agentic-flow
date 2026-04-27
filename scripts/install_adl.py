@@ -14,9 +14,9 @@ try:
 except ModuleNotFoundError:  # pragma: no cover
     tomllib = None
 
-MARKETPLACE_NAME = "agentic-flow"
+MARKETPLACE_NAME = "agentic-dev"
 PLUGIN_NAME = "autonomous-decision-loop"
-REPO_SLUG = "say828/agentic-flow"
+REPO_SLUG = "say828/agentic-dev"
 
 
 def ensure_dir(path: Path) -> None:
@@ -191,14 +191,14 @@ def install_codex(repo_dir: Path) -> None:
     wrapper_source = repo_dir / "codex" / "bin" / "codex"
     inline_source = repo_dir / "codex" / "bin" / "codex-inline-tmux.sh"
     real_codex = resolve_real_codex({wrapper_source, wrapper_target}) or "/usr/local/bin/codex"
-    market_home = Path.home() / ".local" / "share" / "agentic-flow"
+    market_home = Path.home() / ".local" / "share" / "agentic-dev"
     ensure_dir(market_home)
     env_file = market_home / "codex.env"
     env_file.write_text(f"CODEX_REAL_BIN={real_codex}\n")
     for target, source in ((wrapper_target, wrapper_source), (bin_dir / "codex-inline-tmux.sh", inline_source)):
         if target.exists() or target.is_symlink():
             if target.name == "codex" and not target.is_symlink():
-                backup = bin_dir / "codex.agentic-flow-backup"
+                backup = bin_dir / "codex.agentic-dev-backup"
                 if backup.exists() or backup.is_symlink():
                     backup.unlink()
                 shutil.move(str(target), str(backup))
@@ -219,7 +219,7 @@ def main() -> int:
         install_claude(repo_dir)
     if not args.skip_codex:
         install_codex(repo_dir)
-    print("agentic-flow ADL install complete")
+    print("agentic-dev ADL install complete")
     return 0
 
 

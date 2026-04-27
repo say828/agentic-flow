@@ -1,6 +1,6 @@
 # Autonomous Decision Loop
 
-This directory is vendored into `agentic-flow`.
+This directory is vendored into `agentic-dev`.
 Use the market repository as the install surface.
 
 Autonomous Decision Loop (ADL) is a response-conditioned orchestration layer for terminal coding agents.
