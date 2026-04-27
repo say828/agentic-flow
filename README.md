@@ -47,7 +47,6 @@ Available Claude commands:
 
 ```text
 /agentic-dev:init
-/agentic-dev:sdd-workflow
 ```
 
 ## Install In Codex

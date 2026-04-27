@@ -22,4 +22,3 @@ When this plugin applies:
 Command surface:
 
 - `/agentic-dev:init` - initialize the current repository into the Agentic Dev flow.
-- `/agentic-dev:sdd-workflow` - print the integrated SDD workflow and expected retained outputs.
