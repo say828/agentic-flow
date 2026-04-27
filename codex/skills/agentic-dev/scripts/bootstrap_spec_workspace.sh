@@ -5,7 +5,7 @@ usage() {
   cat <<'EOF'
 Usage: bootstrap_spec_workspace.sh [repo_root]
 
-Prepare minimal directories for universal-agentic-dev:
+Prepare minimal directories for agentic-dev:
   - docs/plans
   - docs/evidence
   - docs/canonical-targets

@@ -1,4 +1,4 @@
-# Universal Agentic Development Plugin
+# Agentic Dev Plugin
 
 ## Goal
 
@@ -152,11 +152,11 @@ Ship as marketplace plugin assets:
 - orchestrator integrations
 - review/approval surfaces
 
-## Proposed Product Surface In `agentic-dev`
+## Proposed Product Surface In `agentic-flow`
 
 ### Codex skill
 
-`universal-agentic-dev`
+`agentic-dev`
 
 Responsibilities:
 
@@ -192,7 +192,7 @@ For any feature-oriented request:
 
 ## Success Criteria
 
-The plugin is successful when installing `agentic-dev` makes it possible to invoke a named workflow and reliably obtain:
+The plugin is successful when installing `agentic-flow` makes it possible to invoke a named workflow and reliably obtain:
 
 - a plan
 - a canonical target

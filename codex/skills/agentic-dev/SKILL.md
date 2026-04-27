@@ -1,9 +1,9 @@
 ---
-name: universal-agentic-dev
+name: agentic-dev
 description: Run a universal spec-to-implementation workflow using canonical spec compilation, deterministic proof gates, AI-assisted structural diagnosis, and repair loops. Use when the user asks for exact implementation against specs, screen designs, contracts, or wants a rigorous agentic development workflow across repos.
 ---
 
-# Universal Agentic Development
+# Agentic Dev
 
 ## Objective
 

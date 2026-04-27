@@ -17,7 +17,7 @@
 4. `Semantic Contract Verification`
 5. `Repair Loop`
 
-자세한 설계는 [Universal Agentic Development Plugin](/home/sh/Documents/Github/agentic-dev/docs/universal-agentic-dev-plugin.md) 문서를 따른다.
+자세한 설계는 [Agentic Dev Plugin](/home/sh/Documents/Github/agentic-flow/docs/agentic-dev-plugin.md) 문서를 따른다.
 
 ## Claude Code 명령 표면
 
@@ -27,7 +27,7 @@
 
 ## Codex 표면
 
-- `universal-agentic-dev` skill
+- `agentic-dev` skill
 
 ## 의도된 사용 흐름
 

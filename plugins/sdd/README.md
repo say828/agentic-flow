@@ -11,8 +11,8 @@ The plugin vendors the same SDD skill structure used by Codex:
 ## Claude Code
 
 ```bash
-/plugin marketplace add say828/agentic-dev
-/plugin install sdd@agentic-dev
+/plugin marketplace add say828/agentic-flow
+/plugin install sdd@agentic-flow
 ```
 
 Use the plugin for repositories where `sdd/` is the canonical delivery record.
@@ -20,7 +20,7 @@ Use the plugin for repositories where `sdd/` is the canonical delivery record.
 ## Codex
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/say828/agentic-dev/main/scripts/install.sh | bash -s -- --codex-only
+curl -fsSL https://raw.githubusercontent.com/say828/agentic-flow/main/scripts/install.sh | bash -s -- --codex-only
 ```
 
 The installer copies the Codex skill to:

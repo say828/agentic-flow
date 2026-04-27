@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_SLUG="say828/agentic-dev"
+REPO_SLUG="say828/agentic-flow"
 INSTALL_DIR="${HOME}/.local/bin"
 CODEX_SKILLS_DIR="${HOME}/.codex/skills"
-MARKET_HOME="${HOME}/.local/share/agentic-dev"
+MARKET_HOME="${HOME}/.local/share/agentic-flow"
 MARKET_REPO_DIR="${MARKET_HOME}/repo"
 TMP_ROOT=""
 REPO_DIR=""
@@ -18,8 +18,8 @@ Usage:
 
 Installs:
   - Claude binary + marketplace instructions
-  - Codex skills: planning-with-files, universal-agentic-dev, sdd
-  - Autonomous Decision Loop for Codex and Claude from agentic-dev
+  - Codex skills: planning-with-files, agentic-dev, sdd
+  - Autonomous Decision Loop for Codex and Claude from agentic-flow
 
 Options:
   --repo-dir PATH  Use a local repository checkout instead of downloading one
@@ -78,7 +78,7 @@ ensure_repo_checkout() {
   archive_path="${TMP_ROOT}/repo.tar.gz"
   curl -fsSL -o "${archive_path}" "${archive_url}"
   tar -xzf "${archive_path}" -C "${TMP_ROOT}"
-  REPO_DIR="$(find "${TMP_ROOT}" -maxdepth 1 -mindepth 1 -type d -name '*agentic-dev*' | head -n 1)"
+  REPO_DIR="$(find "${TMP_ROOT}" -maxdepth 1 -mindepth 1 -type d -name '*agentic-flow*' | head -n 1)"
 
   if [[ -z "${REPO_DIR}" || ! -d "${REPO_DIR}" ]]; then
     echo "Failed to prepare repository checkout for ${REPO_SLUG}" >&2
@@ -188,9 +188,9 @@ install_market_adl() {
 install_codex_skills() {
   echo "Installing Codex skills into ${CODEX_SKILLS_DIR}..."
   install_codex_skill "planning-with-files"
-  install_codex_skill "universal-agentic-dev"
+  install_codex_skill "agentic-dev"
   install_codex_skill "sdd"
-  echo "Installed Codex skills: planning-with-files, universal-agentic-dev, sdd"
+  echo "Installed Codex skills: planning-with-files, agentic-dev, sdd"
 }
 
 main() {
@@ -219,22 +219,22 @@ main() {
   if [[ "${INSTALL_CLAUDE}" -eq 1 ]]; then
     echo "Install the Claude Code plugin:"
     echo "  /plugin marketplace add ${REPO_SLUG}"
-    echo "  /plugin install autonomous-decision-loop@agentic-dev"
-    echo "  /plugin install ship@agentic-dev"
-    echo "  /plugin install spec-orchestrator@agentic-dev"
-    echo "  /plugin install sdd@agentic-dev"
+    echo "  /plugin install autonomous-decision-loop@agentic-flow"
+    echo "  /plugin install ship@agentic-flow"
+    echo "  /plugin install spec-orchestrator@agentic-flow"
+    echo "  /plugin install sdd@agentic-flow"
     echo
-    echo "Claude ADL plugin linked locally from agentic-dev."
+    echo "Claude ADL plugin linked locally from agentic-flow."
     echo
   fi
   if [[ "${INSTALL_CODEX}" -eq 1 ]]; then
     echo "Installed Codex skills:"
     echo "  - planning-with-files"
-    echo "  - universal-agentic-dev"
+    echo "  - agentic-dev"
     echo "  - sdd"
     echo
     echo "Configured Codex ADL:"
-    echo "  - notify -> agentic-dev/autonomous-decision-loop/runtime/codex_notify.py"
+    echo "  - notify -> agentic-flow/autonomous-decision-loop/runtime/codex_notify.py"
     echo "  - wrapper -> ~/.local/bin/codex"
     echo
     echo "Use them by name in Codex prompts after restart if needed."

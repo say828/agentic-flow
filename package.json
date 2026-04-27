@@ -1,5 +1,5 @@
 {
-  "name": "agentic-dev-monorepo",
+  "name": "agentic-flow-monorepo",
   "private": true,
   "workspaces": [
     "packages/*"
