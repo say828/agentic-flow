@@ -136,6 +136,7 @@ Generalization rule:
 - repo-specific behavior lives in `.agentic-dev/contract.json`
 - runtime-friendly aliases may live in `.codex/agentic-dev.json` and `.claude/agentic-dev.json`
 - the plugin never hardcodes service names, routes, or proof commands
+- phase commands may use `auto` so the runner infers common build, proof, deploy, and verification commands from the target repo
 - service repos like `palcar` only provide commands and artifacts, not forks of the skill
 
 Contract resolution rule:

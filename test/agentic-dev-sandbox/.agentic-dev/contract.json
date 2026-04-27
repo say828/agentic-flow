@@ -32,6 +32,7 @@
   },
   "notes": [
     "This file is repo-local and keeps the plugin general.",
-    "Point proof to a strict deterministic gate implemented inside the target repo."
+    "Use auto to let agentic-dev infer common repo commands, or replace any command with an explicit repo-local shell command.",
+    "Point proof to a strict deterministic gate implemented inside the target repo when the auto-detected command is not sufficient."
   ]
 }

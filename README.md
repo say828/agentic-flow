@@ -112,13 +112,15 @@ The contract defines phases such as:
 ```json
 {
   "commands": {
-    "build": "npm run build",
-    "proof": "npm run proof",
-    "deploy_dev": "npm run deploy:dev",
-    "verify_dev": "npm run verify:dev"
+    "build": "auto",
+    "proof": "auto",
+    "deploy_dev": "auto",
+    "verify_dev": "auto"
   }
 }
 ```
+
+`auto` lets the runner infer common repo commands from `package.json`, Python tests, and Compose files. Replace any phase with an explicit shell command when a repository has a stricter retained gate.
 
 Run phases through the bundled runner:
 

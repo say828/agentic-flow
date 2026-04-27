@@ -14,6 +14,6 @@
 ## Checklist
 
 - [x] Review existing repository delivery conventions.
-- [x] Fill real build/proof/deploy commands in `.agentic-dev/contract.json`.
+- [x] Confirm the auto-detected build/proof/deploy commands, or override `.agentic-dev/contract.json` when the repo needs explicit commands.
 - [x] Run the retained verification surface.
 - [x] Record evidence in `sdd/03_verify/01_feature/agentic-dev-sandbox.md`.

@@ -24,6 +24,7 @@ phase="$1"
 repo_root="${2:-$(pwd)}"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 resolver_path="${script_dir}/resolve_repo_contract.py"
+detector_path="${script_dir}/detect_phase_command.py"
 
 case "${phase}" in
   build|proof|deploy_dev|verify_dev)
@@ -63,7 +64,16 @@ PY
   exit 1
 }
 
+if [[ "${command}" == "auto" ]]; then
+  if [[ ! -f "${detector_path}" ]]; then
+    echo "Missing phase command detector: ${detector_path}" >&2
+    exit 1
+  fi
+  command="$(python3 "${detector_path}" "${repo_root}" "${phase}")"
+fi
+
 printf 'Running phase `%s` from %s\n' "${phase}" "${contract_path}"
+printf 'Resolved command: %s\n' "${command}"
 (
   cd "${repo_root}"
   eval "${command}"

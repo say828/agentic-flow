@@ -9,10 +9,10 @@
     "canonical_targets_dir": "sdd/02_plan/canonical-targets"
   },
   "commands": {
-    "build": "echo \"set build command\"",
-    "proof": "echo \"set deterministic proof command\"",
-    "deploy_dev": "echo \"set DEV deploy command if required\"",
-    "verify_dev": "echo \"set DEV runtime verification command if required\""
+    "build": "auto",
+    "proof": "auto",
+    "deploy_dev": "auto",
+    "verify_dev": "auto"
   },
   "artifacts": {
     "proof_output": "tmp/proof-results.json"
@@ -32,6 +32,7 @@
   },
   "notes": [
     "This file is repo-local and keeps the plugin general.",
-    "Point proof to a strict deterministic gate implemented inside the target repo."
+    "Use auto to let agentic-dev infer common repo commands, or replace any command with an explicit repo-local shell command.",
+    "Point proof to a strict deterministic gate implemented inside the target repo when the auto-detected command is not sufficient."
   ]
 }

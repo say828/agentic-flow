@@ -305,7 +305,7 @@ if [[ ! -f "${repo_root}/${sdd_plan_path}" ]]; then
 ## Checklist
 
 - [ ] Review existing repository delivery conventions.
-- [ ] Fill real build/proof/deploy commands in \`.agentic-dev/contract.json\`.
+- [ ] Confirm the auto-detected build/proof/deploy commands, or override \`.agentic-dev/contract.json\` when the repo needs explicit commands.
 - [ ] Run the retained verification surface.
 - [ ] Record evidence in \`${sdd_verify_path}\`.
 EOF
@@ -327,7 +327,7 @@ if [[ ! -f "${repo_root}/${sdd_verify_path}" ]]; then
 
 ## Residual Risk
 
-- Pending until repo-local build/proof/deploy commands are filled and executed.
+- Pending until the repo-local build/proof/deploy commands are resolved and executed.
 EOF
 fi
 

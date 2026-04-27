@@ -92,6 +92,8 @@ Keep repo-specific commands in `.agentic-dev/contract.json`.
 
 - Runtime-friendly aliases may live at `.codex/agentic-dev.json` and `.claude/agentic-dev.json`.
 - Do not hardcode service commands into the skill itself.
+- Use `auto` for build/proof/deploy phases when the bundled runner should infer common commands from the target repo.
+- Override `auto` with explicit shell commands only when the repo has a stricter retained gate.
 - This allows the same skill to work across service repos without becoming service-specific.
 
 ## Execution Helpers
