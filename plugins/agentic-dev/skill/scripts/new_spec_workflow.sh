@@ -5,7 +5,7 @@ usage() {
   cat <<'EOF'
 Usage: new_spec_workflow.sh "title" [repo_root]
 
-Create docs/plans/<YYYY-MM-DD>-<slug>.md from assets/spec-workflow-template.md.
+Create sdd/02_plan/01_feature/<slug>_workflow.md from assets/spec-workflow-template.md.
 Print the created file path.
 EOF
 }
@@ -32,8 +32,8 @@ if [[ -z "$slug" ]]; then
 fi
 
 today="$(date +%F)"
-plans_dir="${repo_root}/docs/plans"
-plan_path="${plans_dir}/${today}-${slug}.md"
+plans_dir="${repo_root}/sdd/02_plan/01_feature"
+plan_path="${plans_dir}/${slug}_workflow.md"
 
 mkdir -p "$plans_dir"
 

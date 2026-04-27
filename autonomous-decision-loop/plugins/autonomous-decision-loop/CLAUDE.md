@@ -1,1 +1,0 @@
-- `/adl:doctor` - print the current ADL runtime health and installation status.

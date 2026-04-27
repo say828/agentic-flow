@@ -128,6 +128,7 @@ Recommended first package shape:
 - `scripts/run_repo_phase.sh`
 - `scripts/analyze_proof_results.py`
 - `references/failure-taxonomy.md`
+- `references/section-map.md`
 - reusable templates under `assets/`
 
 Generalization rule:
@@ -148,9 +149,7 @@ Contract resolution rule:
 Ship as marketplace plugin assets:
 
 - commands
-- hooks
-- orchestrator integrations
-- review/approval surfaces
+- review and approval surfaces
 
 ## Proposed Product Surface In `agentic-flow`
 
@@ -165,16 +164,14 @@ Responsibilities:
 - require evidence logs
 - drive a bounded repair loop until proof passes or blockers are explicit
 
-### Future Claude plugin
-
-`spec-orchestrator`
+### Claude plugin
 
 Responsibilities:
 
-- render validation dashboards
-- collect hook events
-- classify verification failures
-- coordinate repair agents
+- expose the same Agentic Dev setup instructions in Claude Code
+- initialize repository-local contracts and the integrated SDD scaffold through the bundled script
+- keep Discord webhook secrets out of committed files
+- route development work back to deterministic proof and verification gates
 
 ## Execution Contract
 

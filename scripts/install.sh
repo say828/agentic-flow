@@ -2,29 +2,23 @@
 set -euo pipefail
 
 REPO_SLUG="say828/agentic-flow"
-INSTALL_DIR="${HOME}/.local/bin"
 CODEX_SKILLS_DIR="${HOME}/.codex/skills"
 MARKET_HOME="${HOME}/.local/share/agentic-flow"
 MARKET_REPO_DIR="${MARKET_HOME}/repo"
 TMP_ROOT=""
 REPO_DIR=""
-INSTALL_CLAUDE=1
-INSTALL_CODEX=1
 
 usage() {
   cat <<'EOF'
 Usage:
-  install.sh [--repo-dir PATH] [--claude-only | --codex-only]
+  install.sh [--repo-dir PATH]
 
-Installs:
-  - Claude binary + marketplace instructions
-  - Codex skills: planning-with-files, agentic-dev, sdd
-  - Autonomous Decision Loop for Codex and Claude from agentic-flow
+Installs Codex skills:
+  - agentic-dev
 
 Options:
   --repo-dir PATH  Use a local repository checkout instead of downloading one
-  --claude-only    Install only Claude assets
-  --codex-only     Install only Codex assets
+  --codex-only     Accepted for compatibility; Codex skills are the only installer target
   --help           Show this help
 EOF
 }
@@ -35,14 +29,7 @@ while [[ $# -gt 0 ]]; do
       REPO_DIR="${2:-}"
       shift 2
       ;;
-    --claude-only)
-      INSTALL_CLAUDE=1
-      INSTALL_CODEX=0
-      shift
-      ;;
     --codex-only)
-      INSTALL_CLAUDE=0
-      INSTALL_CODEX=1
       shift
       ;;
     --help|-h)
@@ -86,64 +73,17 @@ ensure_repo_checkout() {
   fi
 }
 
-install_claude_binary() {
-  case "$(uname -s)" in
-    Darwin) os="macos" ;;
-    Linux)  os="linux" ;;
-    *)      echo "Unsupported OS. Use Windows installer instead." >&2; exit 1 ;;
-  esac
-
-  case "$(uname -m)" in
-    x86_64|amd64)   arch="x64" ;;
-    arm64|aarch64)  arch="arm64" ;;
-    *)              echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
-  esac
-
-  binary_name="claude-orchestrator-${os}-${arch}"
-  legacy_binary_name="claude-maestro-${os}-${arch}"
-
-  echo "Fetching latest claude-orchestrator release..."
-  latest_tag="$(curl -fsSL "https://api.github.com/repos/${REPO_SLUG}/releases/latest" | grep '"tag_name"' | cut -d'"' -f4)"
-
-  if [[ -z "${latest_tag}" ]]; then
-    echo "Failed to fetch latest version" >&2
-    exit 1
+stage_market_repo() {
+  local source_resolved target_resolved
+  source_resolved="$(readlink -f "${REPO_DIR}" 2>/dev/null || printf '%s' "${REPO_DIR}")"
+  target_resolved="$(readlink -f "${MARKET_REPO_DIR}" 2>/dev/null || printf '%s' "${MARKET_REPO_DIR}")"
+  if [[ "${source_resolved}" == "${target_resolved}" ]]; then
+    return
   fi
-
-  echo "Installing claude-orchestrator ${latest_tag}..."
-
-  mkdir -p "${INSTALL_DIR}"
-
-  tmp_file="$(mktemp)"
-  binary_url="https://github.com/${REPO_SLUG}/releases/download/${latest_tag}/${binary_name}"
-  legacy_binary_url="https://github.com/${REPO_SLUG}/releases/download/${latest_tag}/${legacy_binary_name}"
-
-  echo "Downloading ${binary_url}..."
-  if ! curl -fsSL -o "${tmp_file}" "${binary_url}"; then
-    echo "Primary binary asset not found, trying legacy release asset ${legacy_binary_name}..."
-    curl -fsSL -o "${tmp_file}" "${legacy_binary_url}"
-  fi
-
-  mv "${tmp_file}" "${INSTALL_DIR}/claude-orchestrator"
-  chmod +x "${INSTALL_DIR}/claude-orchestrator"
-
-  echo
-  echo "claude-orchestrator ${latest_tag} installed to ${INSTALL_DIR}/claude-orchestrator"
-
-  if ! echo "${PATH}" | tr ':' '\n' | grep -qx "${INSTALL_DIR}"; then
-    echo
-    echo "${INSTALL_DIR} is not in your PATH. Add it with:"
-    echo
-
-    case "${SHELL:-}" in
-      */zsh)  shell_config="~/.zshrc" ;;
-      */bash) shell_config="~/.bashrc" ;;
-      *)      shell_config="your shell config" ;;
-    esac
-
-    echo "  echo 'export PATH=\"\$HOME/.local/bin:\$PATH\"' >> ${shell_config}"
-    echo "  source ${shell_config}"
-  fi
+  mkdir -p "${MARKET_HOME}"
+  rm -rf "${MARKET_REPO_DIR}"
+  mkdir -p "${MARKET_REPO_DIR}"
+  cp -R "${REPO_DIR}/." "${MARKET_REPO_DIR}/"
 }
 
 install_codex_skill() {
@@ -161,86 +101,19 @@ install_codex_skill() {
   cp -R "${source_dir}" "${target_dir}"
 }
 
-stage_market_repo() {
-  local source_resolved target_resolved
-  source_resolved="$(readlink -f "${REPO_DIR}" 2>/dev/null || printf '%s' "${REPO_DIR}")"
-  target_resolved="$(readlink -f "${MARKET_REPO_DIR}" 2>/dev/null || printf '%s' "${MARKET_REPO_DIR}")"
-  if [[ "${source_resolved}" == "${target_resolved}" ]]; then
-    return
-  fi
-  mkdir -p "${MARKET_HOME}"
-  rm -rf "${MARKET_REPO_DIR}"
-  mkdir -p "${MARKET_REPO_DIR}"
-  cp -R "${REPO_DIR}/." "${MARKET_REPO_DIR}/"
-}
-
-install_market_adl() {
-  local -a args=()
-  if [[ "${INSTALL_CLAUDE}" -eq 0 ]]; then
-    args+=(--skip-claude)
-  fi
-  if [[ "${INSTALL_CODEX}" -eq 0 ]]; then
-    args+=(--skip-codex)
-  fi
-  python3 "${MARKET_REPO_DIR}/scripts/install_adl.py" --repo-dir "${MARKET_REPO_DIR}" "${args[@]}"
-}
-
-install_codex_skills() {
-  echo "Installing Codex skills into ${CODEX_SKILLS_DIR}..."
-  install_codex_skill "planning-with-files"
-  install_codex_skill "agentic-dev"
-  install_codex_skill "sdd"
-  echo "Installed Codex skills: planning-with-files, agentic-dev, sdd"
-}
-
 main() {
-  if [[ "${INSTALL_CLAUDE}" -eq 1 || "${INSTALL_CODEX}" -eq 1 ]]; then
-    ensure_repo_checkout
-    stage_market_repo
-  fi
+  ensure_repo_checkout
+  stage_market_repo
 
-  if [[ "${INSTALL_CLAUDE}" -eq 1 ]]; then
-    install_claude_binary
-  fi
-
-  if [[ "${INSTALL_CODEX}" -eq 1 ]]; then
-    install_codex_skills
-  fi
-
-  if [[ "${INSTALL_CLAUDE}" -eq 1 || "${INSTALL_CODEX}" -eq 1 ]]; then
-    install_market_adl
-  fi
+  echo "Installing Codex skills into ${CODEX_SKILLS_DIR}..."
+  install_codex_skill "agentic-dev"
 
   echo
-  echo "=========================================="
-  echo "  INSTALLATION COMPLETE!"
-  echo "=========================================="
+  echo "Installed Codex skills:"
+  echo "  - agentic-dev"
   echo
-  if [[ "${INSTALL_CLAUDE}" -eq 1 ]]; then
-    echo "Install the Claude Code plugin:"
-    echo "  /plugin marketplace add ${REPO_SLUG}"
-    echo "  /plugin install autonomous-decision-loop@agentic-flow"
-    echo "  /plugin install ship@agentic-flow"
-    echo "  /plugin install spec-orchestrator@agentic-flow"
-    echo "  /plugin install agentic-dev@agentic-flow"
-    echo "  /plugin install sdd@agentic-flow"
-    echo
-    echo "Claude ADL plugin linked locally from agentic-flow."
-    echo
-  fi
-  if [[ "${INSTALL_CODEX}" -eq 1 ]]; then
-    echo "Installed Codex skills:"
-    echo "  - planning-with-files"
-    echo "  - agentic-dev"
-    echo "  - sdd"
-    echo
-    echo "Configured Codex ADL:"
-    echo "  - notify -> agentic-flow/autonomous-decision-loop/runtime/codex_notify.py"
-    echo "  - wrapper -> ~/.local/bin/codex"
-    echo
-    echo "Use them by name in Codex prompts after restart if needed."
-    echo
-  fi
+  echo "Agentic Flow repo staged at:"
+  echo "  ${MARKET_REPO_DIR}"
 }
 
 main "$@"

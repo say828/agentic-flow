@@ -1,9 +1,0 @@
-{
-  "commands": [
-    {
-      "name": "adl:doctor",
-      "description": "Show installation and runtime health for Autonomous Decision Loop.",
-      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/adl_doctor.sh"
-    }
-  ]
-}

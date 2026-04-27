@@ -6,7 +6,7 @@
       "sdd/01_planning",
       "sdd/02_plan"
     ],
-    "canonical_targets_dir": "docs/canonical-targets"
+    "canonical_targets_dir": "sdd/02_plan/canonical-targets"
   },
   "commands": {
     "build": "echo \"set build command\"",

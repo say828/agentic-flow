@@ -5,7 +5,7 @@ usage() {
   cat <<'EOF'
 Usage: new_spec_evidence.sh "title" [repo_root]
 
-Create docs/evidence/<YYYY-MM-DD>-<slug>.md from assets/spec-evidence-template.md.
+Create sdd/03_verify/01_feature/<slug>_evidence.md from assets/spec-evidence-template.md.
 Print the created file path.
 EOF
 }
@@ -32,8 +32,8 @@ if [[ -z "$slug" ]]; then
 fi
 
 today="$(date +%F)"
-evidence_dir="${repo_root}/docs/evidence"
-evidence_path="${evidence_dir}/${today}-${slug}.md"
+evidence_dir="${repo_root}/sdd/03_verify/01_feature"
+evidence_path="${evidence_dir}/${slug}_evidence.md"
 
 mkdir -p "$evidence_dir"
 

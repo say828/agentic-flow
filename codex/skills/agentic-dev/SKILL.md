@@ -1,6 +1,6 @@
 ---
 name: agentic-dev
-description: "Use when setting up or running an end-to-end agentic development process. Handles first-use repo onboarding with GitHub Project/Issue setup, SDD scaffold, Agentic Dev contract, Discord webhook notification wiring, then drives spec-to-implementation loops with deterministic proof gates and repair."
+description: "Use when setting up or running an end-to-end agentic development process. Handles first-use repo onboarding with GitHub Project/Issue setup, SDD planning and verification, Agentic Dev contract, Discord webhook notification wiring, then drives implementation, test, deployment, monitoring, deterministic proof gates, and repair loops through one integrated workflow."
 ---
 
 # Agentic Dev
@@ -14,8 +14,9 @@ Run one development process from first repo setup through implementation and ver
 3. wire Discord webhook notifications without committing secrets,
 4. canonicalize the spec target,
 5. implement against deterministic runtime conditions,
-6. run proof and verification gates,
-7. repair until pass or explicit blocker.
+6. run SDD verification and proof gates,
+7. repair until pass or explicit blocker,
+8. record the current delivery state when deployment or monitoring is in scope.
 
 ## First-Use Setup
 
@@ -32,7 +33,6 @@ The script creates or updates:
 - `.claude/agentic-dev.json`
 - `.agentic-dev/onboarding.json`
 - `.agentic-dev/discord.env.example`
-- `docs/plans`, `docs/evidence`, `docs/canonical-targets`
 - `sdd/01_planning`, `sdd/02_plan`, `sdd/03_verify`, `sdd/99_toolchain`
 - a task plan under `sdd/02_plan/01_feature`
 - a verification record under `sdd/03_verify/01_feature`
@@ -47,7 +47,25 @@ export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
 
 The script writes only `.agentic-dev/discord.env.example`.
 
-## Development Workflow
+## Integrated SDD Workflow
+
+Use SDD as the retained delivery record whenever the target repository has or is being initialized with `sdd/`.
+
+1. Inspect relevant planning artifacts in `sdd/01_planning` before code edits.
+2. Create or update a durable plan under `sdd/02_plan/<section>/`.
+3. For a new implementation task, create a clean task branch or worktree before the first file edit when the target repository requires it.
+4. Implement against the plan and repo contract.
+5. Record retained verification, regression scope, evidence, and residual risk in `sdd/03_verify`.
+
+Read `references/section-map.md` when you need the exact destination inside `sdd/`.
+
+Do not create or repopulate a parallel `docs/` tree in repositories that use `sdd/` as the canonical delivery system.
+
+For repositories with DEV and PROD environments, validate DEV first, promote to PROD only after DEV passes, then rerun the retained validation surface in PROD. If PROD validation fails, roll back or follow the approved recovery path and record the result in `sdd/03_verify`.
+
+For persistence-affecting work, verify schema parity against the real environments that matter for the repository instead of assuming code and deployed schema match.
+
+## Development Loop
 
 1. Identify the spec inputs and runtime target.
 2. Remove non-implementable noise from the spec mentally or by tooling.
@@ -103,7 +121,9 @@ The runner resolves the nearest contract by searching `.codex/agentic-dev.json`,
 - Deterministic proof remains the release gate.
 - AI analysis should explain failures, not waive them.
 - Never compare raw planning pages when only a subset is actually implementable.
-- Prefer repo-local evidence logs over ephemeral chat summaries.
+- Prefer repo-local SDD verification records over ephemeral chat summaries.
+- Do not skip SDD planning review just because the code change looks small.
+- Do not leave verification evidence only in chat text.
 - If DEV deployment is part of the operating contract, do not stop at local build success.
 
 ## Expected Outputs
@@ -130,4 +150,5 @@ The runner resolves the nearest contract by searching `.codex/agentic-dev.json`,
 - Repo contract resolver: `scripts/resolve_repo_contract.py`
 - Repo phase runner: `scripts/run_repo_phase.sh`
 - Proof analyzer: `scripts/analyze_proof_results.py`
+- SDD section map: `references/section-map.md`
 - Failure taxonomy: `references/failure-taxonomy.md`

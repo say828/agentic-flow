@@ -8,7 +8,6 @@ Usage:
 
 Bootstrap one repo into the Agentic Dev flow:
   - .agentic-dev contract and .codex/.claude aliases
-  - docs/plans, docs/evidence, docs/canonical-targets
   - sdd/01_planning, sdd/02_plan, sdd/03_verify, sdd/99_toolchain
   - optional GitHub Project and Issue
   - optional Discord webhook test notification
@@ -181,10 +180,8 @@ data = {
         "plan": sdd_plan,
         "verify": sdd_verify,
     },
-    "docs": {
-        "workflow": workflow,
-        "evidence": evidence,
-    },
+    "workflow": workflow,
+    "evidence": evidence,
     "discord": {
         "webhook_env_var": discord_env_var,
         "env_example": ".agentic-dev/discord.env.example",

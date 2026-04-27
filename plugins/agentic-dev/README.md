@@ -1,6 +1,6 @@
 # agentic-dev
 
-End-to-end agentic development workflow for Claude Code and Codex.
+End-to-end agentic development workflow for Claude Code and Codex, including integrated SDD planning and verification.
 
 ## Claude Code
 
