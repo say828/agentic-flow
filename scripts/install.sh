@@ -222,6 +222,7 @@ main() {
     echo "  /plugin install autonomous-decision-loop@agentic-flow"
     echo "  /plugin install ship@agentic-flow"
     echo "  /plugin install spec-orchestrator@agentic-flow"
+    echo "  /plugin install agentic-dev@agentic-flow"
     echo "  /plugin install sdd@agentic-flow"
     echo
     echo "Claude ADL plugin linked locally from agentic-flow."

@@ -23,6 +23,11 @@
       "description": "Response-conditioned autonomous decision loop for Claude Code and Codex"
     },
     {
+      "name": "agentic-dev",
+      "source": "./plugins/agentic-dev",
+      "description": "End-to-end agentic development workflow with GitHub Projects, Issues, SDD, Discord hooks, proof gates, and repair loops"
+    },
+    {
       "name": "sdd",
       "source": "./plugins/sdd",
       "description": "SDD-first development workflow for Claude Code and Codex"

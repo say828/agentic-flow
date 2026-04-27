@@ -1,0 +1,14 @@
+{
+  "name": "agentic-dev",
+  "version": "0.1.0",
+  "description": "End-to-end agentic development setup and execution workflow with GitHub Projects, Issues, SDD, repo contracts, Discord hooks, proof gates, and repair loops.",
+  "author": {
+    "name": "say828",
+    "email": "gusdn0828@gmail.com",
+    "url": "https://github.com/say828"
+  },
+  "homepage": "https://github.com/say828/agentic-flow",
+  "repository": "https://github.com/say828/agentic-flow",
+  "license": "MIT",
+  "keywords": ["claude-code", "codex", "agentic-dev", "sdd", "github-projects", "discord"]
+}

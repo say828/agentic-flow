@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agentic Dev"
+  short_description: "Bootstrap GitHub, SDD, repo contracts, Discord notifications, and proof-driven development loops"
+  default_prompt: "Use $agentic-dev to set up or run this repository's agentic development flow, including GitHub project/issue setup, SDD planning and verification, Agentic Dev contract commands, Discord webhook notification wiring, deterministic proof gates, and repair loops."
